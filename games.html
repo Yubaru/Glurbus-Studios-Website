@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Glurbus Studios Masterpieces">
+  <title>Our Masterpieces</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logo_glurbus.png">
+</head>
+
+<body>
+  <div class="dynamic-bg" id="dynamicBg"></div>
+
+  <header id="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo"><img src="assets/logo.png" alt="Glurbus Studios" class="logo-img"></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="games.html">Games</a></li>
+          <li><a href="index.html#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="timeline-container" id="timeline">
+    <div class="timeline-track">
+      <div class="timeline-progress" id="timelineProgress"></div>
+    </div>
+    <div class="timeline-node" data-index="0">
+      <div class="node-dot" id="dot-0"></div>
+      <div class="node-label">
+        <span class="node-date">2024</span>
+        <span class="node-title">DDPOW</span>
+      </div>
+    </div>
+    <div class="timeline-node" data-index="1">
+      <div class="node-dot" id="dot-1"></div>
+      <div class="node-label">
+        <span class="node-date">2025</span>
+        <span class="node-title">DDPOW Plus!</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="games-scroll-container">
+    <section class="game-showcase-section" data-bg="assets/pow.png" data-index="0">
+      <div class="showcase-content container fade-in">
+        <div class="showcase-text">
+          <h2>Doki Doki Paradise of Wacko</h2>
+          <p>A Doki Doki Literature Club Parody Game made for a dear friend. Can you survive the paradise?</p>
+          <a href="pow.html" class="cta-button">View Details</a>
+        </div>
+        <div class="showcase-image glass-panel">
+          <img src="assets/pow.png" alt="Doki Doki Paradise of Wacko">
+        </div>
+      </div>
+    </section>
+
+    <section class="game-showcase-section" data-bg="assets/powp.png" data-index="1">
+      <div class="showcase-content container fade-in">
+        <div class="showcase-text">
+          <h2>Doki Doki Paradise of Wacko Plus!</h2>
+          <div class="badge" style="display:inline-block; position:relative; top:0; right:0; margin-bottom: 1rem;">New
+            Release</div>
+          <p>The critically acclaimed remaster to Doki Doki Paradise of Wacko. One last time... before we say goodbye.
+          </p>
+          <a href="powp.html" class="cta-button">View Details</a>
+        </div>
+        <div class="showcase-image glass-panel" style="box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);">
+          <img src="assets/powp.png" alt="Doki Doki Paradise of Wacko Plus!">
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <footer style="position:relative; z-index: 10;">
+    <div class="container footer-content text-center">
+      <h3>Glurbus Studios</h3>
+      <p>&copy; 2026 Glurbus Studios. All Rights Reserved Bitches.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
