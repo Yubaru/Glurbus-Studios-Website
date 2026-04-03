@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>my site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Glurbus Studios - Creators of Doki Doki Paradise of Wacko">
+    <title>Glurbus Studios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>yo this my site</h1>
-  <p>my projects go here</p>
+    <header id="navbar">
+        <div class="container nav-content">
+            <h1 class="logo">Glurbus<span>.</span></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2 class="slide-up">Welcome to the Wacko World</h2>
+            <p class="slide-up delay-1">Playful, professional, and everything in between. We build games that break the mold.</p>
+            <a href="#games" class="cta-button slide-up delay-2">Explore Games</a>
+        </div>
+        <div class="hero-bg-elements">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+        </div>
+    </section>
+
+    <section id="games" class="games-section container section-padding">
+        <h2 class="section-title text-center pb-4">Our Masterpieces</h2>
+        <div class="games-grid">
+            <div class="game-card fade-in">
+                <div class="card-image">
+                    <img src="assets/game1.png" alt="Doki Doki Paradise of Wacko Cover Art">
+                </div>
+                <div class="card-body">
+                    <h3>Doki Doki Paradise of Wacko</h3>
+                    <p>Dive into an eccentric world filled with quirky characters and playful chaos! Can you survive the paradise?</p>
+                </div>
+            </div>
+
+            <div class="game-card fade-in delay-1">
+                <div class="card-image" style="box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);">
+                    <img src="assets/game2.png" alt="Doki Doki Paradise of Wacko Plus! Cover Art">
+                    <div class="badge">New Release</div>
+                </div>
+                <div class="card-body">
+                    <h3>Doki Doki Paradise of Wacko Plus!</h3>
+                    <p>The acclaimed wackiness returns! More characters, extra sparkle, and a brand new story path.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section container section-padding fade-in">
+        <div class="about-content">
+            <h2 class="section-title">About Glurbus Studios</h2>
+            <p>We are a passionate team pushing the boundaries of what indie games can be. Founded on the principle that games should be deeply professional yet wonderfully playful, Glurbus Studios continues to craft worlds you can't help but fall in love with.</p>
+            <p class="highlight-text">Stay tuned. The best is yet to come.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content text-center">
+            <h3>Glurbus Studios</h3>
+            <p>&copy; 2026 Glurbus Studios. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
