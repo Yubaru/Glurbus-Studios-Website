@@ -345,12 +345,19 @@ footer p {
 }
 
 .fade-in {
-    opacity: 0;
+    /* Visible by default — JS will handle the animation */
+    opacity: 1;
+    transform: none;
     transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Only hide elements when JS is confirmed running */
+.js-ready .fade-in {
+    opacity: 0;
     transform: translateY(20px);
 }
 
-.fade-in.visible {
+.js-ready .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -487,9 +494,9 @@ footer p {
 }
 
 /* ===== SHOWCASE ENTRY ANIMATIONS ===== */
-/* Children start hidden until parent gets .visible */
-.game-showcase-section .fade-in .showcase-text,
-.game-showcase-section .fade-in .showcase-image {
+/* Only hide showcase children when JS is running */
+.js-ready .game-showcase-section .fade-in .showcase-text,
+.js-ready .game-showcase-section .fade-in .showcase-image {
     opacity: 0;
     transition: none;
 }
@@ -519,13 +526,14 @@ footer p {
 }
 
 /* Triggered when IntersectionObserver adds .visible to the parent .fade-in */
-.game-showcase-section .fade-in.visible .showcase-text {
+.js-ready .game-showcase-section .fade-in.visible .showcase-text {
     animation: slideInLeft 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.game-showcase-section .fade-in.visible .showcase-image {
+.js-ready .game-showcase-section .fade-in.visible .showcase-image {
     animation: slideInRight 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
 }
+
 
 .showcase-content {
     display: grid;
