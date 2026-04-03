@@ -301,12 +301,13 @@ if (expandableVideos.length > 0) {
     // 1. Reveal: find the hardcoded overlay already in the HTML
     const revealOverlay = document.getElementById('pageReveal');
     if (revealOverlay) {
-        // Give browser one paint frame to render the mask, then slide it away
+        // Force the browser to calculate the current position before we tell it to move.
+        // This ensures the transition actually animates from 0 to -100% instead of snapping.
+        revealOverlay.offsetHeight; 
+        
         requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                revealOverlay.classList.add('active');
-                setTimeout(() => revealOverlay.remove(), TRANSITION_MS + 200);
-            });
+            revealOverlay.classList.add('active');
+            setTimeout(() => revealOverlay.remove(), TRANSITION_MS + 200);
         });
     }
 

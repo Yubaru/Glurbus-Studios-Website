@@ -698,6 +698,7 @@ footer p {
     font-size: clamp(2.5rem, 5vw, 4rem);
     background: linear-gradient(135deg, #FBBF24, #FFF);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 1rem;
     font-weight: 900;
