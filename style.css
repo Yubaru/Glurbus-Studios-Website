@@ -577,6 +577,65 @@ footer p {
     }
 }
 
+/* ===== GLURBUS WIPE PAGE TRANSITION ===== */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-darker);
+    z-index: 999999;
+    pointer-events: none; /* Let users click before it fully animates just in case */
+    transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Glurbus Transition Logo */
+.transition-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15vh;
+    height: auto;
+    max-width: 150px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: breatheZoom 1.5s ease-in-out infinite;
+}
+
+.page-transition-overlay.active .transition-logo {
+    opacity: 1;
+}
+
+@keyframes breatheZoom {
+    0% { transform: translate(-50%, -50%) scale(0.9); filter: drop-shadow(0 0 5px rgba(251,191,36,0.2)); }
+    50% { transform: translate(-50%, -50%) scale(1.15); filter: drop-shadow(0 0 20px rgba(251,191,36,0.6)); }
+    100% { transform: translate(-50%, -50%) scale(0.9); filter: drop-shadow(0 0 5px rgba(251,191,36,0.2)); }
+}
+
+/* Wiping IN (covering the screen when leaving) */
+.page-transition-overlay.swipe-in {
+    transform: translateY(100vh);
+    border-top: 15px solid var(--yellow);
+}
+
+.page-transition-overlay.swipe-in.active {
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Wiping OUT (revealing the screen on load) */
+.page-transition-overlay.swipe-out {
+    transform: translateY(0);
+    border-bottom: 15px solid var(--yellow);
+    pointer-events: all;
+}
+
+.page-transition-overlay.swipe-out.active {
+    transform: translateY(-100vh);
+}
+
 /* Custom Subpage Styles */
 .logo {
     display: flex;
@@ -647,12 +706,126 @@ footer p {
     overflow: hidden;
 }
 
-.video-container iframe {
+.video-container iframe,
+.video-container video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== EXPANDING THIN LINE VIDEOS ===== */
+.thin-strip-video {
+    padding-bottom: 0 !important;
+    height: 120px !important;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.thin-strip-video:hover {
+    transform: scale(1.02);
+    border-color: var(--yellow);
+    box-shadow: 0 0 20px rgba(251,191,36,0.3);
+}
+
+.strip-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+.thin-strip-video:hover .strip-overlay {
+    background: rgba(0,0,0,0.4);
+}
+
+.play-hint {
+    color: var(--yellow);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 1.2rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    transition: transform 0.3s ease;
+}
+
+.thin-strip-video:hover .play-hint {
+    transform: scale(1.1);
+}
+
+/* THEATER MODE OVERLAY */
+.theater-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,5,5,0.95);
+    backdrop-filter: blur(15px);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theater-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.close-theater {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+    line-height: 1;
+}
+
+.close-theater:hover {
+    color: var(--yellow);
+    transform: scale(1.1);
+}
+
+/* When the video goes fullscreen */
+.video-container.expanded-theater {
+    position: fixed;
+    z-index: 10000;
+    /* Dimensions will be set via JS inline initially for FLIP, then changed to: */
+    width: 90vw !important;
+    max-width: 1200px !important;
+    height: auto !important;
+    padding-bottom: calc(90vw * 0.5625) !important; /* 16:9 ratio fallback */
+    max-height: 80vh !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: default;
+}
+
+@media (min-width: 1200px) {
+    .video-container.expanded-theater {
+        padding-bottom: calc(1200px * 0.5625) !important;
+    }
+}
+
+.video-container.expanded-theater:hover {
+    transform: translate(-50%, -50%) !important; /* nullify hover effect */
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+}
+
+.video-container.expanded-theater .strip-overlay {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .download-section {
@@ -667,6 +840,174 @@ a.game-card {
     display: block;
     text-decoration: none;
     color: inherit;
+}
+
+/* ===== GLURBUS TV CINEMATIC LAYOUT ===== */
+.tv-page-body {
+    background-color: var(--bg-dark);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background Marquee */
+.tv-marquee-bg {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100vw;
+    transform: translateY(-50%) rotate(-5deg) scale(1.2);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    color: var(--yellow);
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.marquee-track {
+    display: flex;
+    animation: scrollMarquee 40s linear infinite;
+}
+
+.marquee-track.reverse {
+    animation: scrollMarqueeReverse 35s linear infinite;
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollMarqueeReverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* TV Typography & Hero */
+.pt-huge {
+    padding-top: 15vh;
+    padding-bottom: 5vh;
+    position: relative;
+    z-index: 10;
+}
+
+.tv-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 5px 20px rgba(0,0,0,0.8);
+}
+
+.tv-subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* TV Grid Layout */
+.tv-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    padding-bottom: 4rem;
+}
+
+.tv-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
+    background: rgba(20, 20, 20, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.tv-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(251, 191, 36, 0.1);
+}
+
+/* Info Section */
+.tv-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.tv-info p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.tv-badge {
+    display: inline-block;
+    background: rgba(251,191,36,0.1);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    animation: tvPulse 2s infinite;
+}
+
+@keyframes tvPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(251,191,36,0.3); }
+    50% { opacity: 0.6; box-shadow: none; }
+}
+
+/* Player Wrapper & Ambilight Effect */
+.tv-player-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.tv-ambilight {
+    position: absolute;
+    inset: -15px;
+    background: var(--yellow);
+    filter: blur(40px);
+    opacity: 0.2;
+    z-index: -1;
+    border-radius: 20px;
+    animation: ambilightGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes ambilightGlow {
+    from { opacity: 0.15; transform: scale(0.98); }
+    to { opacity: 0.35; transform: scale(1.02); }
+}
+
+.tv-glass-frame {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.8);
+    padding: 10px;    /* Creating a bezel */
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.tv-glass-frame iframe {
+    border-radius: 8px; /* Inner screen rounded */
+}
+
+.tv-footer {
+    position: relative;
+    z-index: 10;
+    background: transparent;
+    border-top: 1px solid var(--glass-border);
 }
 
 /* ========== HAMBURGER BUTTON ========== */
@@ -776,5 +1117,8 @@ a.game-card {
 
     /* Logo sizing in scrolled state on mobile */
     header.scrolled .logo-img { height: 30px; }
-}
 
+    .tv-grid {
+        grid-template-columns: 1fr;
+    }
+}

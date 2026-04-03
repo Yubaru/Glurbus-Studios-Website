@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Glurbus TV - Watch the latest from Glurbus Studios">
+  <title>Glurbus TV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logo_glurbus.png">
+</head>
+
+<body class="tv-page-body">
+  <!-- Scrolling Marquee Background -->
+  <div class="tv-marquee-bg">
+    <div class="marquee-track">
+      <span>GLURBUS TV • WATCH NOW • MASTERPIECES • GLURBUS TV • WATCH NOW • MASTERPIECES • </span>
+      <span>GLURBUS TV • WATCH NOW • MASTERPIECES • GLURBUS TV • WATCH NOW • MASTERPIECES • </span>
+    </div>
+    <div class="marquee-track reverse">
+      <span>LATEST UPLOADS • EXCLUSIVE • LATEST UPLOADS • EXCLUSIVE • LATEST UPLOADS • EXCLUSIVE • </span>
+      <span>LATEST UPLOADS • EXCLUSIVE • LATEST UPLOADS • EXCLUSIVE • LATEST UPLOADS • EXCLUSIVE • </span>
+    </div>
+    <div class="marquee-track">
+      <span>GLURBUS TV • HOLY FUCKING SHIT • OH MY GOD • GLURBUS TV • HOLY FUCKING SHIT • OH MY GOD • </span>
+      <span>GLURBUS TV • HOLY FUCKING SHIT • OH MY GOD • GLURBUS TV • HOLY FUCKING SHIT • OH MY GOD • </span>
+    </div>
+  </div>
+
+  <header id="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo"><img src="assets/logo.png" alt="Glurbus Studios" class="logo-img" height="90"
+          style="max-height:90px;width:auto;"></a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#home" class="nav-close-link">Home</a></li>
+          <li><a href="videos.html" class="nav-close-link">Glurbus TV</a></li>
+          <li><a href="games.html" class="nav-close-link">Games</a></li>
+          <li><a href="index.html#about" class="nav-close-link">About</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="tv-hero pt-huge">
+    <div class="container text-center fade-in">
+      <h1 class="tv-title">GLURBUS <span class="highlight-text">TV</span></h1>
+      <p class="tv-subtitle">Broadcasts directly from the Glurbus dimension.</p>
+    </div>
+  </section>
+
+  <section class="tv-category container fade-in" style="margin-bottom: 6rem;">
+    <div class="category-header">
+      <h2
+        style="color: var(--yellow); font-size: 2.5rem; font-weight: 900; letter-spacing: 0.1em; border-bottom: 2px solid rgba(251,191,36,0.3); padding-bottom: 0.5rem; margin-bottom: 3rem; text-shadow: 0 0 15px rgba(251,191,36,0.2);">
+        JJS CLIPS</h2>
+    </div>
+    <div class="tv-grid">
+      <!-- JJS Clip 1 -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Funny Naoya Blackflash Clip</h2>
+          <p>I hit many black flashes on a Naoya player. It was funny.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/jjsclips/blackflash_naoya_clip.mp4" type="video/mp4">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JJS Clip 2 -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Nanami Blackflash Clip</h2>
+          <p>4 black flashes on a player. Consecutive.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/jjsclips/nanami_blackflash_clip.mp4" type="video/mp4">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JJS Clip 3 (Placeholder for growth) -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Todo 3v1 Clip</h2>
+          <p>These people wanted to 3v1 me. So I did what I had to do. Which is what I did.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/jjsclips/todo_3v1_clip.mp4" type="video/mp4">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tv-category container fade-in" style="margin-bottom: 6rem;">
+    <div class="category-header">
+      <h2
+        style="color: var(--yellow); font-size: 2.5rem; font-weight: 900; letter-spacing: 0.1em; border-bottom: 2px solid rgba(251,191,36,0.3); padding-bottom: 0.5rem; margin-bottom: 3rem; text-shadow: 0 0 15px rgba(251,191,36,0.2);">
+        GLURBUS STUDIOS</h2>
+    </div>
+    <div class="tv-grid">
+      <!-- Glurbus Studio Video 1 -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Jacko Losing Animation</h2>
+          <p>The animation for Jacko losing during the Yazzinator fight.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/glurbusstudios/powp/jackolose.webm" type="video/webm">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glurbus Studio Video 2 -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Jacko Winning Animation</h2>
+          <p>The animation for Jacko winning during the Yazzinator fight.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/glurbusstudios/powp/jackowin.webm" type="video/webm">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Glurbus Studio Video 3 -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Unlimited Baguette Works</h2>
+          <p>The Glurbus Studios version of a Minecraft UBW animation.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/glurbusstudios/animations/unlimited_baguette_works.mp4" type="video/mp4">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="tv-category container fade-in mb-large">
+    <div class="category-header">
+      <h2
+        style="color: var(--yellow); font-size: 2.5rem; font-weight: 900; letter-spacing: 0.1em; border-bottom: 2px solid rgba(251,191,36,0.3); padding-bottom: 0.5rem; margin-bottom: 3rem; text-shadow: 0 0 15px rgba(251,191,36,0.2);">
+        OTHER</h2>
+    </div>
+    <div class="tv-grid">
+      <!-- Other Video 1 -->
+      <div class="tv-card">
+        <div class="tv-info">
+          <h2>Yazz Roasts Aiden</h2>
+          <p>cell ah beat.</p>
+        </div>
+        <div class="tv-player-wrapper">
+          <div class="tv-ambilight"></div>
+          <div class="video-container tv-glass-frame thin-strip-video js-expandable-video">
+            <video preload="metadata" class="local-video" muted>
+              <source src="videos/other/cell.mp4" type="video/mp4">
+            </video>
+            <div class="strip-overlay"><span class="play-hint">▶ CLICK TO WATCH</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tv-footer fade-in">
+    <div class="container footer-content text-center">
+      <h3>Glurbus Studios</h3>
+      <p>&copy; 2026 Glurbus Studios. All Rights Reserved Bitches.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
