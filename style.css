@@ -148,12 +148,65 @@ header.scrolled .nav-links a {
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     background: linear-gradient(135deg, #fff, #a3a3a3);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.desktop-only {
+    display: inline-block;
+}
+
+.mobile-hero-links {
+    display: none;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 320px;
+    margin: 2.5rem auto 0;
+}
+
+.mobile-btn {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    padding: 0.7rem 1.2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-white);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    border-left: 4px solid var(--primary-yellow);
+}
+
+.mobile-btn:active {
+    background: var(--primary-yellow);
+    color: var(--bg-dark);
+    transform: scale(0.96);
+}
+
+.btn-icon {
+    font-size: 1.4rem;
+    margin-right: 1rem;
+    background: rgba(255,255,255,0.05);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.btn-text {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
 
 .hero p {
     font-size: 1.25rem;
@@ -1152,5 +1205,36 @@ a.game-card {
     footer .footer-content p {
         font-size: 0.8rem;
         padding: 0 1rem;
+    }
+
+    /* Home Hero Mobile Quick Links Only */
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-hero-links {
+        display: flex !important;
+    }
+
+    .mobile-btn {
+        animation: slideInLeft 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+    }
+
+    .mobile-btn:nth-child(1) { animation-delay: 0.2s; }
+    .mobile-btn:nth-child(2) { animation-delay: 0.3s; }
+    .mobile-btn:nth-child(3) { animation-delay: 0.4s; }
+    .mobile-btn:nth-child(4) { animation-delay: 0.5s; }
+    .mobile-btn:nth-child(5) { animation-delay: 0.6s; }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
