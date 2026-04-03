@@ -1,7 +1,43 @@
 // ─── Mark JS as active ──────────────────────────────────────────────────────
-// CSS hides .fade-in only when this class exists on <html>.
-// Without JS, all content stays visible.
 document.documentElement.classList.add('js-ready');
+
+// ─── Hamburger Menu ──────────────────────────────────────────────────────────
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (hamburgerBtn && navLinks) {
+    // Inject the dim overlay into the body
+    const overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
+
+    const openMenu = () => {
+        hamburgerBtn.classList.add('open');
+        navLinks.classList.add('mobile-open');
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        hamburgerBtn.classList.remove('open');
+        navLinks.classList.remove('mobile-open');
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+    };
+
+    hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close when tapping the dim overlay
+    overlay.addEventListener('click', closeMenu);
+
+    // Close when tapping any nav link
+    document.querySelectorAll('.nav-close-link').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+}
+
 
 // ─── Navbar Scroll Effect ────────────────────────────────────────────────────
 const navbar = document.getElementById('navbar');

@@ -669,9 +669,112 @@ a.game-card {
     color: inherit;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .hero h2 { font-size: 2.5rem; }
-    .hero p { font-size: 1.1rem; }
+/* ========== HAMBURGER BUTTON ========== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1100;
+    position: relative;
 }
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-white);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* X animation when open */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ========== MOBILE NAV DRAWER ========== */
+@media (max-width: 768px) {
+    .hamburger { display: flex; }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(8, 8, 8, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1050;
+        border-left: 1px solid var(--glass-border);
+    }
+
+    .nav-links.mobile-open {
+        right: 0;
+    }
+
+    .nav-links li { list-style: none; }
+
+    .nav-links a {
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+    }
+
+    /* Dim overlay behind the drawer */
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 1040;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+    }
+
+    .nav-overlay.visible {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    /* General mobile layout fixes */
+    .hero h2 { font-size: 2.2rem; }
+    .hero p  { font-size: 1rem; }
+
+    .section-padding { padding: 4rem 1rem; }
+
+    /* Game cards stack on mobile */
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Subpage hero shorter */
+    .subpage-hero { height: 40vh; margin-top: 70px; }
+    .subpage-hero-content h1 { font-size: 2rem; }
+
+    /* Timeline hidden on phones (already targeted but reaffirm) */
+    .timeline-container { display: none !important; }
+
+    /* Showcase stacks vertically */
+    .showcase-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .showcase-text h2 { font-size: 2rem; }
+    .showcase-text p  { font-size: 1rem; }
+
+    /* Logo sizing in scrolled state on mobile */
+    header.scrolled .logo-img { height: 30px; }
+}
+
