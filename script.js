@@ -287,68 +287,69 @@ if (expandableVideos.length > 0) {
 }
 
 // ─── Glurbus Cinematic Page Transitions ────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Swipe OUT on load (reveal the page)
-    const outSwiper = document.createElement('div');
-    outSwiper.className = 'page-transition-overlay swipe-out';
-    outSwiper.innerHTML = '<img src="assets/logo_glurbus.png" alt="Glurbus Loading" class="transition-logo">';
-    document.body.appendChild(outSwiper);
-    
-    // Trigger animation next frame to ensure the browser registers the initial state
-    requestAnimationFrame(() => {
+(function () {
+    const LOGO_SRC = 'assets/logo_glurbus.png';
+    const TRANSITION_MS = 700;
+
+    function createOverlay(type) {
+        const overlay = document.createElement('div');
+        overlay.className = 'page-transition-overlay ' + type;
+        overlay.innerHTML = '<img src="' + LOGO_SRC + '" alt="" class="transition-logo">';
+        return overlay;
+    }
+
+    // 1. Reveal: find the hardcoded overlay already in the HTML
+    const revealOverlay = document.getElementById('pageReveal');
+    if (revealOverlay) {
+        // Give browser one paint frame to render the mask, then slide it away
         requestAnimationFrame(() => {
-            outSwiper.classList.add('active');
-            // Remove from DOM after it finishes sliding up off-screen
-            setTimeout(() => outSwiper.remove(), 800);
-        });
-    });
-
-    // 2. Intercept internal links to Swipe IN
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            const target = link.getAttribute('target');
-            
-            // Ignore if no href, external link, hash link for same page, or opening in new tab
-            if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || target === '_blank') {
-                return;
-            }
-
-            // If it's a hash link to another page (e.g. index.html#about), we still want to transition
-            // Wait, if it has a hash but targets the CURRENT page, we should ignore.
-            const isSamePage = href.split('#')[0] === window.location.pathname.split('/').pop() || href.split('#')[0] === '';
-            if (isSamePage && href.includes('#')) {
-                return; // Normal smooth scrolling instead of page transition
-            }
-
-            e.preventDefault();
-
-            // Create and append the wiping mask that slides up from the bottom
-            const inSwiper = document.createElement('div');
-            inSwiper.className = 'page-transition-overlay swipe-in';
-            inSwiper.innerHTML = '<img src="assets/logo_glurbus.png" alt="Glurbus Loading" class="transition-logo">';
-            document.body.appendChild(inSwiper);
-
-            // Trigger animation
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    inSwiper.classList.add('active');
-                });
+                revealOverlay.classList.add('active');
+                setTimeout(() => revealOverlay.remove(), TRANSITION_MS + 200);
             });
-
-            // Wait exactly the length of the CSS transition (800ms) before changing the page
-            setTimeout(() => {
-                window.location.href = href;
-            }, 800);
         });
+    }
+
+    // 2. Intercept internal navigation links
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        const target = link.getAttribute('target');
+
+        // Skip: no href, external, mailto, hash-only, new-tab
+        if (!href || href.startsWith('http') || href.startsWith('mailto') || target === '_blank') return;
+        if (href.startsWith('#')) return;
+
+        // Skip: same-page link with hash
+        const hrefBase = href.split('#')[0];
+        const currentPage = window.location.pathname.split('/').pop();
+        if ((hrefBase === currentPage || hrefBase === '') && href.includes('#')) return;
+
+        e.preventDefault();
+
+        // Create the swipe-in mask
+        const coverOverlay = createOverlay('swipe-in');
+        document.body.appendChild(coverOverlay);
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                coverOverlay.classList.add('active');
+            });
+        });
+
+        // Navigate after the mask fully covers the screen
+        setTimeout(() => {
+            window.location.href = href;
+        }, TRANSITION_MS + 150);
     });
 
-    // 3. BFCache / Back Button Fix
+    // 3. Back-button / BFCache fix
     window.addEventListener('pageshow', (event) => {
-        // If the page was loaded from the browser cache (like hitting the Back button)
         if (event.persisted) {
-            // Remove any stuck swipe-in masks that were added right before navigating away
-            document.querySelectorAll('.swipe-in').forEach(el => el.remove());
+            document.querySelectorAll('.page-transition-overlay').forEach(el => el.remove());
         }
     });
-});
+})();
+

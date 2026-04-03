@@ -578,6 +578,7 @@ footer p {
 }
 
 /* ===== GLURBUS WIPE PAGE TRANSITION ===== */
+
 .page-transition-overlay {
     position: fixed;
     top: 0;
@@ -586,38 +587,34 @@ footer p {
     height: 100vh;
     background-color: var(--bg-darker);
     z-index: 999999;
-    pointer-events: none; /* Let users click before it fully animates just in case */
-    transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 /* Glurbus Transition Logo */
 .transition-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 15vh;
+    width: 12vh;
     height: auto;
-    max-width: 150px;
+    max-width: 120px;
+    filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.5));
+    transform: scale(0);
     opacity: 0;
-    transition: opacity 0.3s ease;
-    animation: breatheZoom 1.5s ease-in-out infinite;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                opacity 0.4s ease;
 }
 
-.page-transition-overlay.active .transition-logo {
-    opacity: 1;
-}
-
-@keyframes breatheZoom {
-    0% { transform: translate(-50%, -50%) scale(0.9); filter: drop-shadow(0 0 5px rgba(251,191,36,0.2)); }
-    50% { transform: translate(-50%, -50%) scale(1.15); filter: drop-shadow(0 0 20px rgba(251,191,36,0.6)); }
-    100% { transform: translate(-50%, -50%) scale(0.9); filter: drop-shadow(0 0 5px rgba(251,191,36,0.2)); }
-}
-
-/* Wiping IN (covering the screen when leaving) */
+/* ── Swipe IN: covers the screen when LEAVING ── */
 .page-transition-overlay.swipe-in {
-    transform: translateY(100vh);
-    border-top: 15px solid var(--yellow);
+    transform: translateY(100%);
+    border-top: 4px solid var(--primary-yellow);
+}
+
+.page-transition-overlay.swipe-in .transition-logo {
+    transform: scale(0);
+    opacity: 0;
 }
 
 .page-transition-overlay.swipe-in.active {
@@ -625,15 +622,32 @@ footer p {
     pointer-events: all;
 }
 
-/* Wiping OUT (revealing the screen on load) */
+.page-transition-overlay.swipe-in.active .transition-logo {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.15s;
+}
+
+/* ── Swipe OUT: reveals the screen on LOAD ── */
 .page-transition-overlay.swipe-out {
     transform: translateY(0);
-    border-bottom: 15px solid var(--yellow);
+    border-bottom: 4px solid var(--primary-yellow);
     pointer-events: all;
 }
 
+.page-transition-overlay.swipe-out .transition-logo {
+    transform: scale(1);
+    opacity: 1;
+}
+
 .page-transition-overlay.swipe-out.active {
-    transform: translateY(-100vh);
+    transform: translateY(-100%);
+}
+
+.page-transition-overlay.swipe-out.active .transition-logo {
+    transform: scale(0);
+    opacity: 0;
+    transition-delay: 0s;
 }
 
 /* Custom Subpage Styles */
