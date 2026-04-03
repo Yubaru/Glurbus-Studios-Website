@@ -47,7 +47,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 10000; /* Higher than transitions if needed, but menu usually needs to be higher */
     transition: background-color 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
     padding: 1.5rem 0;
     background-color: transparent;
@@ -587,7 +587,7 @@ footer p {
     height: 100vh;
     background-color: var(--bg-darker);
     z-index: 999999;
-    pointer-events: none;
+    pointer-events: none; /* Always allow clicks to pass through by default */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -632,7 +632,7 @@ footer p {
 .page-transition-overlay.swipe-out {
     transform: translateY(0);
     border-bottom: 4px solid var(--primary-yellow);
-    pointer-events: all;
+    pointer-events: none; /* DO NOT block touches while the curtain is rising */
 }
 
 .page-transition-overlay.swipe-out .transition-logo {
@@ -1081,9 +1081,12 @@ a.game-card {
     .nav-links li { list-style: none; }
 
     .nav-links a {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-weight: 700;
         letter-spacing: 0.05em;
+        display: block;
+        padding: 1rem 2rem; /* Larger hit target for thumbs */
+        touch-action: manipulation;
     }
 
     /* Dim overlay behind the drawer */
@@ -1135,5 +1138,19 @@ a.game-card {
 
     .tv-grid {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .tv-card {
+        min-height: 250px;
+    }
+
+    .category-header h2 {
+        font-size: 1.8rem;
+    }
+
+    footer .footer-content p {
+        font-size: 0.8rem;
+        padding: 0 1rem;
     }
 }
