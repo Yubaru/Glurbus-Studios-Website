@@ -374,9 +374,10 @@ footer p {
     background-position: center;
     filter: blur(20px) brightness(0.25);
     transform: scale(1.1);
-    z-index: -1;
+    z-index: 0;                          /* 0, not -1 — avoids falling behind body bg */
+    pointer-events: none;                /* NEVER intercept clicks */
     transition: background-image 1s ease-in-out, opacity 1s ease-in-out;
-    opacity: 0; /* Default 0 for intro */
+    opacity: 0;
 }
 
 .games-scroll-container {
